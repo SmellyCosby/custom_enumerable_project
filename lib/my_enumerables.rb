@@ -15,10 +15,6 @@ class Array
       yield(self[i])
       i += 1
     end
+    self
   end
 end
-
-
-arr = [1,2,3]
-
-arr.my_each {|p| puts p}
