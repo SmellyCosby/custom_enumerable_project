@@ -20,6 +20,18 @@ module Enumerable
     filtered_arr
   end
 
+  def my_all?
+    i = 0
+    x = false
+    self.length.times do
+      x = yield(self[i])
+      return false unless x
+
+      i += 1
+    end
+    x
+  end
+
 end
 
 class Array
@@ -35,4 +47,6 @@ class Array
 end
 
 
-[1, 2, 2, 3, 4].my_select {|p| p > 1}
+[1, 2, 2, 3, 4].my_all? {|p| p > 1}
+
+puts [1, 1, 2, 3, 5, 8, 13, 21, 34].my_all? {|value| value > 0}
