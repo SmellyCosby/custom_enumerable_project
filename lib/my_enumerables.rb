@@ -43,6 +43,19 @@ module Enumerable
     end
     x
   end
+
+  def my_none?
+    i = 0
+    return_value = true
+    self.length.times do
+      if yield(self[i])
+        return return_value = false
+      else
+        i += 1
+      end
+    end
+    return_value
+  end
  
     
 
