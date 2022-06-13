@@ -10,12 +10,18 @@ module Enumerable
     self
   end
 
+  def my_select
+    filtered_arr = []
+    i = 0
+    self.length.times do
+      filtered_arr.push(self[i]) if yield(self[i])
+      i += 1
+    end
+    filtered_arr
+  end
+
 end
 
-# You will first have to define my_each
-# on the Array class. Methods defined in
-# your enumerable module will have access
-# to this method
 class Array
   # Define my_each here
   def my_each
@@ -29,4 +35,4 @@ class Array
 end
 
 
-[1,2].my_each_with_index {|p, i| print "#{i}. #{p}\n"}
+[1, 2, 2, 3, 4].my_select {|p| p > 1}
