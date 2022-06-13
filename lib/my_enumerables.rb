@@ -1,5 +1,15 @@
 module Enumerable
   # Your code goes here
+
+  def my_each_with_index
+    i = 0
+    self.length.times do
+      yield(self[i], i)
+      i += 1
+    end
+    self
+  end
+
 end
 
 # You will first have to define my_each
@@ -9,7 +19,6 @@ end
 class Array
   # Define my_each here
   def my_each
-    # code here
     i = 0
     self.length.times do
       yield(self[i])
@@ -18,3 +27,6 @@ class Array
     self
   end
 end
+
+
+[1,2].my_each_with_index {|p, i| print "#{i}. #{p}\n"}
