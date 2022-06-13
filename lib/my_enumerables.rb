@@ -56,6 +56,20 @@ module Enumerable
     end
     return_value
   end
+
+  def my_count
+    counted_array = []
+    i = 0
+    self.length.times do
+      if block_given?
+        counted_array.push(self[i]) if yield(self[i])
+        i += 1
+      else
+        return self.length
+      end
+    end
+    counted_array.length
+  end
  
     
 
@@ -76,4 +90,6 @@ class Array
 end
 
 
-puts [1, 1, 2, 3, 5, 8, 13, 21, 34].my_any? {|value| value > 0}
+#puts [1, 1, 2, 3, 5, 8, 13, 21, 34].my_any? {|value| value > 0}
+
+#puts [1, 1, 2, 3, 5, 8, 13, 21, 34].my_count
