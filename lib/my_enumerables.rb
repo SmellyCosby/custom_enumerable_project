@@ -8,4 +8,17 @@ end
 # to this method
 class Array
   # Define my_each here
+  def my_each
+    # code here
+    i = 0
+    self.length.times do
+      yield(self[i])
+      i += 1
+    end
+  end
 end
+
+
+arr = [1,2,3]
+
+arr.my_each {|p| puts p}
