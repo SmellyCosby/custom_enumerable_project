@@ -70,12 +70,21 @@ module Enumerable
     end
     counted_array.length
   end
- 
-    
 
+  def my_map
+    map_arr = []
+    i = 0
+    self.length.times do
+      map_arr.push(yield(self[i]))
+      i += 1
+    end
+    map_arr
   end
 
+  def my_inject
 
+  end
+end
 
 class Array
   # Define my_each here
