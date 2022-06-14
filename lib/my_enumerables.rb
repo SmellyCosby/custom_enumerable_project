@@ -1,9 +1,7 @@
 module Enumerable
-  # Your code goes here
-
   def my_each_with_index
     i = 0
-    self.length.times do
+    length.times do
       yield(self[i], i)
       i += 1
     end
@@ -11,79 +9,75 @@ module Enumerable
   end
 
   def my_select
-    filtered_arr = []
+    result_array = []
     i = 0
-    self.length.times do
-      filtered_arr.push(self[i]) if yield(self[i])
+    length.times do
+      result_array.push(self[i]) if yield(self[i])
       i += 1
     end
-    filtered_arr
+    result_array
   end
 
   def my_all?
     i = 0
-    x = false
-    self.length.times do
-      x = yield(self[i])
-      return false unless x
+    all_same_value = false
+    length.times do
+      all_same_value = yield(self[i])
+      return false unless all_same_value
 
       i += 1
     end
-    x
+    all_same_value
   end
 
   def my_any?
     i = 0
-    x = false
-    self.length.times do
-      x = yield(self[i])
-      return true unless x == false
+    value_in_array = false
+    length.times do
+      value_in_array = yield(self[i])
+      return true if value_in_array
 
       i += 1
     end
-    x
+    value_in_array
   end
 
   def my_none?
     i = 0
-    return_value = true
-    self.length.times do
-      if yield(self[i])
-        return return_value = false
-      else
-        i += 1
-      end
+    value_not_included = true
+    length.times do
+      return value_not_included = false if yield(self[i])
+
+      i += 1
     end
-    return_value
+    value_not_included
   end
 
   def my_count
-    counted_array = []
+    result_array = []
     i = 0
-    self.length.times do
-      if block_given?
-        counted_array.push(self[i]) if yield(self[i])
-        i += 1
-      else
-        return self.length
-      end
+    length.times do
+      return length unless block_given?
+
+      result_array.push(self[i]) if yield(self[i])
+      i += 1
     end
-    counted_array.length
+    result_array.length
   end
 
   def my_map
-    map_arr = []
+    result_array = []
     i = 0
-    self.length.times do
-      map_arr.push(yield(self[i]))
+    length.times do
+      result_array.push(yield(self[i]))
       i += 1
     end
-    map_arr
+    result_array
   end
 
   def my_inject(accumulator = self[0])
     i = 0
-    self.length.times do
+    length.times do
       accumulator = yield(accumulator, self[i])
       i += 1
     end
@@ -95,21 +89,10 @@ class Array
   # Define my_each here
   def my_each
     i = 0
-    self.length.times do
+    length.times do
       yield(self[i])
       i += 1
     end
     self
   end
-end
-
-
-#puts [1, 1, 2, 3, 5, 8, 13, 21, 34].my_any? {|value| value > 0}
-
-#puts [1, 1, 2, 3, 5, 8, 13, 21, 34].my_count
-
- #[1,2,3].my_each_with_index {|v,i| puts "#{i}. #{v}"}
-
-[1,2,3,4].my_inject do |sum, num|
-  sum * num
 end
