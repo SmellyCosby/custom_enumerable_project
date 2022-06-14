@@ -81,8 +81,13 @@ module Enumerable
     map_arr
   end
 
-  def my_inject
-
+  def my_inject(accumulator = self[0])
+    i = 0
+    self.length.times do
+      accumulator = yield(accumulator, self[i])
+      i += 1
+    end
+    accumulator
   end
 end
 
@@ -102,3 +107,9 @@ end
 #puts [1, 1, 2, 3, 5, 8, 13, 21, 34].my_any? {|value| value > 0}
 
 #puts [1, 1, 2, 3, 5, 8, 13, 21, 34].my_count
+
+ #[1,2,3].my_each_with_index {|v,i| puts "#{i}. #{v}"}
+
+[1,2,3,4].my_inject do |sum, num|
+  sum * num
+end
